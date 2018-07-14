@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import AddNewFlight from './components/AddNewFlight';
+import Flights from './components/Flights';
+import Form from './components/Form';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-      <AddNewFlight />
+        <Form />
+        <Flights />
       </div>
     );
   }

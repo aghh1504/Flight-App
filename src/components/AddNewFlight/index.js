@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Form from '../Form';
+import './index.css';
 
 export default class AddNewFlight extends Component {
 
@@ -17,7 +18,7 @@ export default class AddNewFlight extends Component {
       <div className="AddNewFlight-wrapper">
         <button onClick={this.onModelOpen}>Add Flight</button>
         {
-          isModalOpen ? <Form /> : null
+          isModalOpen ? <Form isModalOpen={isModalOpen}/> : null
         }
       </div>
     );
