@@ -9,8 +9,9 @@
 # production
 /build
 
-/src/config.js
 /data.json
+
+/src/config.js
 
 # misc
 .DS_Store
