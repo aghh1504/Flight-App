@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import Flights from './components/Flights';
-import Form from './components/Form';
+import React, { Component } from "react";
+import Flights from "./components/Flights";
+import Form from "./components/Form";
 
 class App extends Component {
   render() {
