@@ -45,7 +45,7 @@ export default class Flights extends Component {
     return (
       <div>
           {
-            this.state.showMsg ? <AlertMsg message={this.state.msg}/> : null
+            this.state.showMsg ? <AlertMsg message={this.state.msg} type='error'/> : null
           }
         <div className="flights-wrapper">
           {

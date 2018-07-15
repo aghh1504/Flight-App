@@ -7,10 +7,10 @@ import './index.css';
 export default class Form extends Component {
 
   state= {
-    flights: [],
-    isChecked: false,
     msg: '',
+    flights: [],
     showMsg: false,
+    isChecked: false,
     isModalOpen: false,
   }
 
@@ -43,6 +43,7 @@ export default class Form extends Component {
     }
     axios.post('http://localhost:3001/flights/addFlight', {flights})
         .then(res => {
+          console.log('flights', flights);
         this.setState({msg: res.data, showMsg: !this.state.showMsg, isModalOpen: !this.state.isModalOpen})
         })
   }

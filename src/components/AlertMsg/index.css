@@ -1,6 +1,31 @@
-.message-wrapper {
-  background: #e3f9ea;
+.message-wrapper-success, .message-wrapper-error {
+  animation: FadeAnimation 2s ease-in .3s forwards;
   box-shadow: 1px 1px 12px #888888;
   padding: 20px;
   width: 70%;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.message-wrapper-success {
+  background: #e3f9ea;
+  color: #3c763d;
+}
+
+.message-wrapper-error {
+  background: #f2dede;
+  color: #a94442;
+}
+@keyframes FadeAnimation {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
