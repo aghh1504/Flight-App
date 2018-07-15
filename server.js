@@ -45,6 +45,12 @@ app.post('/flights/addFlight', function(req, res){
   res.send('flight added')
 })
 
+app.post('/flights/remove', function(req, res){
+	savedItems = savedItems.filter(item => item.noBooking !== req.body.noBooking)
+  updateItems(res)
+  res.send('flight removed')
+})
+
 app.listen(PORT, function () {
   console.log('Example app listening on port 3001!')
 })

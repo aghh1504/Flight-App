@@ -34,10 +34,36 @@ th {
   text-transform: uppercase;
 }
 .time-to-go {
-  margin-top: 40px;
   font-size: 15px;
   letter-spacing: 1px;
   font-weight: 600;
   text-transform: uppercase;
   color: #ff6600;
+}
+.delete-button {
+  width: 80px;
+  height: 40px;
+  background-color: #f73838;
+}
+.empty-td {
+  width: 40%;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .flights-table {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .table-flight {
+      width: 96%;
+    }
+    .table-sum {
+      width: 90%;
+    }
+
+    .flights-wrapper {
+      margin: 0;
+    }
 }
