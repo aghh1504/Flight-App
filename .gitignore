@@ -9,7 +9,7 @@
 # production
 /build
 
-/data.json
+.data.json
 
 /src/config.js
 
