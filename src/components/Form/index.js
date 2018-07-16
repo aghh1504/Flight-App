@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { Row } from "./Row";
-import { AlertMsg } from "../AlertMsg";
-import "./index.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { Row } from './Row';
+import { AlertMsg } from '../AlertMsg';
+import './index.css';
 
 export default class Form extends Component {
   state = {
-    msg: "",
+    msg: '',
     flights: [],
     showMsg: false,
     isChecked: false,
@@ -52,10 +52,12 @@ export default class Form extends Component {
       baggage: isChecked
     };
     axios
-      .post("http://localhost:3001/flights/addFlight", { flights })
+      .post('http://localhost:3001/flights/addFlight', { flights })
       .then(res => {
+        console.log(res.data);
         this.setState({
-          msg: res.data,
+          flights: res.data,
+          msg: 'ok',
           showMsg: !this.state.showMsg,
           isModalOpen: !this.state.isModalOpen
         });
@@ -69,27 +71,27 @@ export default class Form extends Component {
         {this.state.showMsg ? <AlertMsg message={this.state.msg} /> : null}
         <div className="AddNewFlight-wrapper">
           <button onClick={this.onModelOpen}>Add Flight</button>
-          {this.state.isModalOpen
-            ? <div className="form-wrapper">
-                <form onSubmit={this.onSubmit}>
-                  <Row name="from" onChange={this.onChange} />
-                  <Row name="to" onChange={this.onChange} />
-                  <Row name="when" onChange={this.onChange} />
-                  <Row name="time" onChange={this.onChange} />
-                  <Row name="arrivalsTime" onChange={this.onChange} />
-                  <Row name="airline" onChange={this.onChange} />
-                  <Row name="website" onChange={this.onChange} />
-                  <Row name="noBooking" onChange={this.onChange} />
-                  <Row name="price" onChange={this.onChange} />
-                  <Row
-                    name="baggage"
-                    onChange={this.onChecked}
-                    checked={this.state.isChecked}
-                  />
-                  <button type="submit">Submit</button>
-                </form>
-              </div>
-            : null}
+          {this.state.isModalOpen ? (
+            <div className="form-wrapper">
+              <form onSubmit={this.onSubmit}>
+                <Row name="from" onChange={this.onChange} />
+                <Row name="to" onChange={this.onChange} />
+                <Row name="when" onChange={this.onChange} />
+                <Row name="time" onChange={this.onChange} />
+                <Row name="arrivalsTime" onChange={this.onChange} />
+                <Row name="airline" onChange={this.onChange} />
+                <Row name="website" onChange={this.onChange} />
+                <Row name="noBooking" onChange={this.onChange} />
+                <Row name="price" onChange={this.onChange} />
+                <Row
+                  name="baggage"
+                  onChange={this.onChecked}
+                  checked={this.state.isChecked}
+                />
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          ) : null}
         </div>
       </div>
     );
