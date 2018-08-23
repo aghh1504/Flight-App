@@ -22,47 +22,12 @@ export default class Form extends Component {
   };
 
   onModelOpen = () => {
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+    this.setState({ isModalOpen: true });
   };
 
   onSubmit = e => {
-    e.preventDefault();
-    const {
-      from,
-      to,
-      when,
-      time,
-      arrivalsTime,
-      airline,
-      website,
-      noBooking,
-      price,
-      isChecked
-    } = this.state;
-    const flights = {
-      from: from,
-      to: to,
-      when: when,
-      time: time,
-      arrivalsTime: arrivalsTime,
-      airline: airline,
-      website: website,
-      noBooking: noBooking,
-      price: price,
-      baggage: isChecked
-    };
-    axios
-      .post('http://localhost:3001/flights/addFlight', { flights })
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          flights: res.data,
-          msg: 'ok',
-          showMsg: !this.state.showMsg,
-          isModalOpen: !this.state.isModalOpen
-        });
-      })
-      .catch(err => console.log(err));
+    this.props.onAddFlight(e);
+    this.setState(() => ({ isModalOpen: false }));
   };
 
   render() {

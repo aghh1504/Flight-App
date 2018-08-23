@@ -9,7 +9,8 @@ class App extends Component {
     flights: [],
     value: '',
     msg: '',
-    showMsg: ''
+    showMsg: '',
+    closeModal: false
   };
 
   componentDidMount() {
@@ -39,6 +40,46 @@ class App extends Component {
     this.setState({ value: e.target.value });
   };
 
+  onAddFlight = e => {
+    e.preventDefault();
+    const {
+      from,
+      to,
+      when,
+      time,
+      arrivalsTime,
+      airline,
+      website,
+      noBooking,
+      price,
+      isChecked,
+      baggage
+    } = e.target;
+    const flights = {
+      from: from.value,
+      to: to.value,
+      when: when.value,
+      time: time.value,
+      arrivalsTime: arrivalsTime.value,
+      airline: airline.value,
+      website: website.value,
+      noBooking: noBooking.value,
+      price: price.value,
+      baggage: baggage.checked
+    };
+    axios
+      .post('http://localhost:3001/flights/addFlight', { flights })
+      .then(res => {
+        this.setState({
+          flights: res.data,
+          msg: 'added',
+          showMsg: !this.state.showMsg,
+          closeModal: !this.state.closeModal
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div>
@@ -51,7 +92,10 @@ class App extends Component {
         </form>
         {this.state.value === password ? (
           <div className="App">
-            <Form />
+            <Form
+              onAddFlight={this.onAddFlight}
+              closeModal={this.state.closeModal}
+            />
             <Flights
               flights={this.state.flights}
               onDeleteFlight={this.onDeleteFlight}
