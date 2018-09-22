@@ -7,10 +7,10 @@ import Form from './components/Form';
 class App extends Component {
   state = {
     flights: [],
+    closeModal: false,
     value: '',
     msg: '',
     showMsg: '',
-    closeModal: false
   };
 
   componentDidMount() {
