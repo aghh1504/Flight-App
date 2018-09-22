@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
-import axios from 'axios';
 import moment from 'moment';
 import { AlertMsg } from '../AlertMsg';
 import './index.css';

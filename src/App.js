@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { password } from './config';
+// import { password } from './config';
 import Flights from './components/Flights';
 import Form from './components/Form';
 
@@ -52,7 +52,6 @@ class App extends Component {
       website,
       noBooking,
       price,
-      isChecked,
       baggage
     } = e.target;
     const flights = {
@@ -83,14 +82,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <form>
-          <input
-            type="text"
-            onChange={this.onChange}
-            value={this.state.value}
-          />
-        </form>
-        {this.state.value === password ? (
           <div className="App">
             <Form
               onAddFlight={this.onAddFlight}
@@ -103,8 +94,6 @@ class App extends Component {
               msg={this.state.msg}
             />
           </div>
-        ) : (
-          <div>You dont have rigths to see this</div>
         )}
       </div>
     );
