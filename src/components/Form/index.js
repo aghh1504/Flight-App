@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Row } from './Row';
 import { AlertMsg } from '../AlertMsg';
 import './index.css';
@@ -7,27 +6,17 @@ import './index.css';
 export default class Form extends Component {
   state = {
     msg: '',
-    flights: [],
     showMsg: false,
-    isChecked: false,
     isModalOpen: false
   };
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  onChecked = e => {
-    this.setState({ isChecked: !this.state.isChecked });
-  };
-
   onModelOpen = () => {
-    this.setState({ isModalOpen: true });
+    this.setState({ isModalOpen: !this.state.isModalOpen });
   };
 
   onSubmit = e => {
     this.props.onAddFlight(e);
-    this.setState(() => ({ isModalOpen: false }));
+    this.setState(() => ({ isModalOpen: !this.state.isModalOpen }));
   };
 
   render() {
@@ -39,20 +28,16 @@ export default class Form extends Component {
           {this.state.isModalOpen ? (
             <div className="form-wrapper">
               <form onSubmit={this.onSubmit}>
-                <Row name="from" onChange={this.onChange} />
-                <Row name="to" onChange={this.onChange} />
-                <Row name="when" onChange={this.onChange} />
-                <Row name="time" onChange={this.onChange} />
-                <Row name="arrivalsTime" onChange={this.onChange} />
-                <Row name="airline" onChange={this.onChange} />
-                <Row name="website" onChange={this.onChange} />
-                <Row name="noBooking" onChange={this.onChange} />
-                <Row name="price" onChange={this.onChange} />
-                <Row
-                  name="baggage"
-                  onChange={this.onChecked}
-                  checked={this.state.isChecked}
-                />
+                <Row name="from" />
+                <Row name="to"/>
+                <Row name="when"/>
+                <Row name="time"/>
+                <Row name="arrivalsTime"/>
+                <Row name="airline"/>
+                <Row name="website"/>
+                <Row name="noBooking"/>
+                <Row name="price"/>
+                <Row name="baggage"/>
                 <button type="submit">Submit</button>
               </form>
             </div>
