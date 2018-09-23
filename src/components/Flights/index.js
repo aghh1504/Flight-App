@@ -21,7 +21,7 @@ export default class Flights extends Component {
   };
 
   render() {
-    const { flights, onDeleteFlight, showMsg, msg } = this.props;
+    const { flights, onDeleteFlight, onEditFlight, showMsg, msg } = this.props;
     return (
       <div>
         {showMsg ? <AlertMsg message={msg} type="error" /> : null}
@@ -60,6 +60,14 @@ export default class Flights extends Component {
                           Time to go : {this.timeToGo(flight.when)}
                         </td>
                         <td className="empty-td" />
+                        <td>
+                          <button
+                            className="delete-button"
+                            onClick={() => onEditFlight(flight.noBooking)}
+                          >
+                            Edit
+                          </button>
+                        </td>
                         <td>
                           <button
                             className="delete-button"

@@ -16,6 +16,7 @@ export default class Form extends Component {
 
   onSubmit = e => {
     this.props.onAddFlight(e);
+    this.props.onEditFlight(e);
     this.setState(() => ({ isModalOpen: !this.state.isModalOpen }));
   };
 

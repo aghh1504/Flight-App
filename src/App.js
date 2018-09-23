@@ -79,17 +79,60 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
+  onEditFlight = (Booking, e) => {
+    console.log(Booking)
+    const {
+      from,
+      to,
+      when,
+      time,
+      arrivalsTime,
+      airline,
+      website,
+      noBooking,
+      price,
+      baggage
+    } = e.target;
+    const flight = {
+      from: from.value,
+      to: to.value,
+      when: when.value,
+      time: time.value,
+      arrivalsTime: arrivalsTime.value,
+      airline: airline.value,
+      website: website.value,
+      noBooking: noBooking.value,
+      price: price.value,
+      baggage: baggage.checked
+    };
+    const indexUpdated = this.state.flights.findIndex(flight => flight.noBooking === Booking);
+    this.state.flights[indexUpdated] = flight;
+    axios
+      .post('http://localhost:3001/flights/editFlight', { flights: this.state.flights })
+      .then(res => {
+        this.setState({
+          flights: res.data,
+          msg: 'Flight updaded',
+          showMsg: !this.state.showMsg,
+          closeModal: !this.state.closeModal
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     return (
       <div>
           <div className="App">
             <Form
               onAddFlight={this.onAddFlight}
+              onEditFlight={this.onEditFlight}
               closeModal={this.state.closeModal}
             />
             <Flights
               flights={this.state.flights}
               onDeleteFlight={this.onDeleteFlight}
+              onEditFlight={this.onEditFlight}
               showMsg={this.state.showMsg}
               msg={this.state.msg}
             />
