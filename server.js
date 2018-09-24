@@ -62,14 +62,14 @@ app.post('/flights/remove', function(req, res) {
   // res.send('flight removed');
 });
 
-app.post("/flights/editFlight/", function(req, res) {
-  console.log("Inside put route: ", JSON.stringify(req.body.flights));
-  Recipe.findByIdAndUpdate(req.body._id, req.body, function(err, savedItems) {
-    console.log("savedItems", savedItems);
-    if (err)
-       res.send(err);
-      res.json(savedItems);
-  });
+app.post('/flights/editFlight/', function(req, res) {
+  const newItem = req.body.flights;
+  savedItems = [newItem, ...savedItems];
+  updateItems(res);
+
+  if (newItem) {
+    res.send(savedItems);
+  }
 });
 
 app.listen(PORT, function() {

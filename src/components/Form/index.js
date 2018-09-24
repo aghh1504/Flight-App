@@ -16,7 +16,6 @@ export default class Form extends Component {
 
   onSubmit = e => {
     this.props.onAddFlight(e);
-    this.props.onEditFlight(e);
     this.setState(() => ({ isModalOpen: !this.state.isModalOpen }));
   };
 
@@ -30,15 +29,15 @@ export default class Form extends Component {
             <div className="form-wrapper">
               <form onSubmit={this.onSubmit}>
                 <Row name="from" />
-                <Row name="to"/>
-                <Row name="when"/>
-                <Row name="time"/>
-                <Row name="arrivalsTime"/>
-                <Row name="airline"/>
-                <Row name="website"/>
-                <Row name="noBooking"/>
-                <Row name="price"/>
-                <Row name="baggage"/>
+                <Row name="to" />
+                <Row name="when" />
+                <Row name="time" />
+                <Row name="arrivalsTime" />
+                <Row name="airline" />
+                <Row name="website" />
+                <Row name="noBooking" />
+                <Row name="price" />
+                <Row name="baggage" />
                 <button type="submit">Submit</button>
               </form>
             </div>

@@ -3,14 +3,16 @@ import axios from 'axios';
 // import { password } from './config';
 import Flights from './components/Flights';
 import Form from './components/Form';
+import EditForm from './components/EditForm';
 
 class App extends Component {
   state = {
     flights: [],
     closeModal: false,
+    editModal: false,
     value: '',
     msg: '',
-    showMsg: '',
+    showMsg: ''
   };
 
   componentDidMount() {
@@ -79,8 +81,12 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  onEditFlight = (Booking, e) => {
-    console.log(Booking)
+  update = noBooking => {
+    this.setState({ editModal: !this.state.editModal });
+  };
+
+  onEditFlight = e => {
+    e.preventDefault();
     const {
       from,
       to,
@@ -93,7 +99,7 @@ class App extends Component {
       price,
       baggage
     } = e.target;
-    const flight = {
+    const flights = {
       from: from.value,
       to: to.value,
       when: when.value,
@@ -105,10 +111,14 @@ class App extends Component {
       price: price.value,
       baggage: baggage.checked
     };
-    const indexUpdated = this.state.flights.findIndex(flight => flight.noBooking === Booking);
-    this.state.flights[indexUpdated] = flight;
+
+    // const indexUpdated = this.state.flights.findIndex(
+    //   flight => flight.noBooking === noBooking
+    // );
     axios
-      .post('http://localhost:3001/flights/editFlight', { flights: this.state.flights })
+      .post('http://localhost:3001/flights/editFlight', {
+        flights: flights
+      })
       .then(res => {
         this.setState({
           flights: res.data,
@@ -121,22 +131,28 @@ class App extends Component {
   };
 
   render() {
+    console.log('edit model state', this.state.editModal);
     return (
       <div>
-          <div className="App">
-            <Form
-              onAddFlight={this.onAddFlight}
+        <div className="App">
+          <Form
+            onAddFlight={this.onAddFlight}
+            closeModal={this.state.closeModal}
+          />
+          {this.state.editModal ? (
+            <EditForm
               onEditFlight={this.onEditFlight}
-              closeModal={this.state.closeModal}
+              editModal={this.state.editModal}
             />
-            <Flights
-              flights={this.state.flights}
-              onDeleteFlight={this.onDeleteFlight}
-              onEditFlight={this.onEditFlight}
-              showMsg={this.state.showMsg}
-              msg={this.state.msg}
-            />
-          </div>
+          ) : null}
+          <Flights
+            flights={this.state.flights}
+            onDeleteFlight={this.onDeleteFlight}
+            update={this.update}
+            showMsg={this.state.showMsg}
+            msg={this.state.msg}
+          />
+        </div>
         )}
       </div>
     );
