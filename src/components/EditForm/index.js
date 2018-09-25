@@ -6,13 +6,13 @@ import './index.css';
 export default class Form extends Component {
   state = {
     msg: '',
-    showMsg: false
+    showMsg: false,
+    isModalOpen: false
   };
 
   onSubmit = e => {
-    console.log('TCL: Form -> e', e.target);
-
     this.props.onEditFlight(e);
+    this.setState(() => ({ isModalOpen: !this.state.isModalOpen }));
   };
 
   render() {

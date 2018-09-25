@@ -13,7 +13,7 @@ export default class Flights extends Component {
     const timeNow = `${yearNow}/${
       monthNow > 11 ? monthNow : '0' + monthNow
     }/${dayOfMonthNow}`.split('/');
-    const then = when ? `${when.split('-')}` : alert('need to br fill in');
+    const then = when ? `${when.split('-')}` : null;
     const diff = moment.duration(moment(then).diff(moment(timeNow)));
     const days = parseInt(diff.asDays());
 

@@ -124,7 +124,7 @@ class App extends Component {
           flights: res.data,
           msg: 'Flight updaded',
           showMsg: !this.state.showMsg,
-          closeModal: !this.state.closeModal
+          editModal: !this.state.editModal
         });
       })
       .catch(err => console.log(err));
@@ -135,15 +135,9 @@ class App extends Component {
     return (
       <div>
         <div className="App">
-          <Form
-            onAddFlight={this.onAddFlight}
-            closeModal={this.state.closeModal}
-          />
+          <Form onAddFlight={this.onAddFlight} />
           {this.state.editModal ? (
-            <EditForm
-              onEditFlight={this.onEditFlight}
-              editModal={this.state.editModal}
-            />
+            <EditForm onEditFlight={this.onEditFlight} />
           ) : null}
           <Flights
             flights={this.state.flights}
