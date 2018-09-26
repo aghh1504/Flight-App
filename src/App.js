@@ -8,6 +8,7 @@ import EditForm from './components/EditForm';
 class App extends Component {
   state = {
     flights: [],
+    flight: {},
     closeModal: false,
     editModal: false,
     value: '',
@@ -82,7 +83,10 @@ class App extends Component {
   };
 
   update = noBooking => {
-    this.setState({ editModal: !this.state.editModal });
+    console.log('noBooking', noBooking);
+    const flight = this.state.flights.find(flight => flight.noBooking === noBooking)
+    console.log('flight', flight);
+    this.setState({ editModal: !this.state.editModal, flight: flight });
   };
 
   onEditFlight = e => {
@@ -112,9 +116,6 @@ class App extends Component {
       baggage: baggage.checked
     };
 
-    // const indexUpdated = this.state.flights.findIndex(
-    //   flight => flight.noBooking === noBooking
-    // );
     axios
       .post('http://localhost:3001/flights/editFlight', {
         flights: flights
@@ -131,13 +132,12 @@ class App extends Component {
   };
 
   render() {
-    console.log('edit model state', this.state.editModal);
     return (
       <div>
         <div className="App">
           <Form onAddFlight={this.onAddFlight} />
           {this.state.editModal ? (
-            <EditForm onEditFlight={this.onEditFlight} />
+            <EditForm onEditFlight={this.onEditFlight} flight={this.state.flight}/>
           ) : null}
           <Flights
             flights={this.state.flights}
