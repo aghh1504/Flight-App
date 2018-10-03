@@ -62,6 +62,16 @@ app.post('/flights/remove', function(req, res) {
   // res.send('flight removed');
 });
 
+app.post('/flights/editFlight/', function(req, res) {
+  const newItem = req.body.flights;
+  savedItems = [newItem, ...savedItems];
+  updateItems(res);
+
+  if (newItem) {
+    res.send(savedItems);
+  }
+});
+
 app.listen(PORT, function() {
   console.log('Example app listening on port 3001!');
 });

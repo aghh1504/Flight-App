@@ -1,0 +1,32 @@
+.form-wrapper {
+    box-shadow: 1px 1px 12px #888888;
+    width: 70%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  background: #f2f2f2;
+  padding: 44px 66px;
+}
+button {
+  height: 63px;
+    width: 150px;
+    background: powderblue;
+    color: white;
+    margin: 20px;
+    font-size: 15px;
+    margin-left: auto;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    form {
+      width: 100%;
+    }
+    input {
+      width: 115px;
+    }
+}

@@ -1,0 +1,14 @@
+
+label {
+  padding: 5px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+}
+input {
+  height: 30px;
+  width: 150px;
+}

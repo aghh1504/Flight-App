@@ -13,7 +13,7 @@ export default class Flights extends Component {
     const timeNow = `${yearNow}/${
       monthNow > 11 ? monthNow : '0' + monthNow
     }/${dayOfMonthNow}`.split('/');
-    const then = when ? `${when.split('-')}` : alert('need to br fill in');
+    const then = when ? `${when.split('-')}` : null;
     const diff = moment.duration(moment(then).diff(moment(timeNow)));
     const days = parseInt(diff.asDays());
 
@@ -21,7 +21,7 @@ export default class Flights extends Component {
   };
 
   render() {
-    const { flights, onDeleteFlight, showMsg, msg } = this.props;
+    const { flights, onDeleteFlight, update, showMsg, msg } = this.props;
     return (
       <div>
         {showMsg ? <AlertMsg message={msg} type="error" /> : null}
@@ -60,6 +60,14 @@ export default class Flights extends Component {
                           Time to go : {this.timeToGo(flight.when)}
                         </td>
                         <td className="empty-td" />
+                        <td>
+                          <button
+                            className="delete-button"
+                            onClick={() => update(flight.noBooking)}
+                          >
+                            Edit
+                          </button>
+                        </td>
                         <td>
                           <button
                             className="delete-button"
