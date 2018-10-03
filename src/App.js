@@ -1,3 +1,5 @@
+//@flow
+
 import React, { Component } from 'react';
 import axios from 'axios';
 // import { password } from './config';
@@ -5,7 +7,19 @@ import Flights from './components/Flights';
 import Form from './components/Form';
 import EditForm from './components/EditForm';
 
-class App extends Component {
+type Props = {};
+
+type State = {
+  flights: Array<{ noBooking: string }>,
+  flight: {},
+  closeModal: boolean,
+  editModal: boolean,
+  value: string,
+  msg: string,
+  showMsg: boolean
+};
+
+class App extends Component<Props, State> {
   state = {
     flights: [],
     flight: {},
@@ -13,7 +27,7 @@ class App extends Component {
     editModal: false,
     value: '',
     msg: '',
-    showMsg: ''
+    showMsg: false
   };
 
   componentDidMount() {
@@ -25,11 +39,10 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
-  onDeleteFlight = noBooking => {
+  onDeleteFlight = (noBooking: string) => {
     axios
       .post('http://localhost:3001/flights/remove', { noBooking })
       .then(data => {
-        console.log(data.data);
         this.setState({
           flights: data.data,
           msg: 'removed',
@@ -39,11 +52,11 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  onChange = e => {
+  onChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     this.setState({ value: e.target.value });
   };
 
-  onAddFlight = e => {
+  onAddFlight = (e: SyntheticEvent<any>) => {
     e.preventDefault();
     const {
       from,
@@ -56,7 +69,7 @@ class App extends Component {
       noBooking,
       price,
       baggage
-    } = e.target;
+    } = e.currentTarget;
     const flights = {
       from: from.value,
       to: to.value,
@@ -82,14 +95,14 @@ class App extends Component {
       .catch(err => console.log(err));
   };
 
-  update = noBooking => {
+  update = (noBooking: string) => {
     const flight = this.state.flights.find(
       flight => flight.noBooking === noBooking
     );
     this.setState({ editModal: !this.state.editModal, flight: flight });
   };
 
-  onEditFlight = flight => {
+  onEditFlight = (flight: {}) => {
     axios
       .post('http://localhost:3001/flights/editFlight', {
         flights: flight
