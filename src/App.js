@@ -83,42 +83,16 @@ class App extends Component {
   };
 
   update = noBooking => {
-    console.log('noBooking', noBooking);
-    const flight = this.state.flights.find(flight => flight.noBooking === noBooking)
-    console.log('flight', flight);
+    const flight = this.state.flights.find(
+      flight => flight.noBooking === noBooking
+    );
     this.setState({ editModal: !this.state.editModal, flight: flight });
   };
 
-  onEditFlight = e => {
-    e.preventDefault();
-    const {
-      from,
-      to,
-      when,
-      time,
-      arrivalsTime,
-      airline,
-      website,
-      noBooking,
-      price,
-      baggage
-    } = e.target;
-    const flights = {
-      from: from.value,
-      to: to.value,
-      when: when.value,
-      time: time.value,
-      arrivalsTime: arrivalsTime.value,
-      airline: airline.value,
-      website: website.value,
-      noBooking: noBooking.value,
-      price: price.value,
-      baggage: baggage.checked
-    };
-
+  onEditFlight = flight => {
     axios
       .post('http://localhost:3001/flights/editFlight', {
-        flights: flights
+        flights: flight
       })
       .then(res => {
         this.setState({
@@ -137,7 +111,10 @@ class App extends Component {
         <div className="App">
           <Form onAddFlight={this.onAddFlight} />
           {this.state.editModal ? (
-            <EditForm onEditFlight={this.onEditFlight} flight={this.state.flight}/>
+            <EditForm
+              onEditFlight={this.onEditFlight}
+              flight={this.state.flight}
+            />
           ) : null}
           <Flights
             flights={this.state.flights}
