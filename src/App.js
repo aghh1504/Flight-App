@@ -19,6 +19,19 @@ type State = {
   showMsg: boolean
 };
 
+type Fields = {
+  from: { value: string },
+  to: { value: string },
+  when: { value: string },
+  time: { value: string },
+  arrivalsTime: { value: string },
+  airline: { value: string },
+  website: { value: string },
+  noBooking: { value: string },
+  price: { value: string },
+  baggage: { checked: boolean }
+};
+
 class App extends Component<Props, State> {
   state = {
     flights: [],
@@ -56,7 +69,9 @@ class App extends Component<Props, State> {
     this.setState({ value: e.target.value });
   };
 
-  onAddFlight = (e: SyntheticEvent<any>) => {
+  onAddFlight = (
+    e: { currentTarget: Fields } & SyntheticEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     const {
       from,
