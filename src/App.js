@@ -152,7 +152,7 @@ class App extends Component {
             msg={this.state.msg}
           />
         </div>
-        )} first commit
+        )} second commit
       </div>
     );
   }
