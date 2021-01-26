@@ -1,9 +1,34 @@
+// @flow
+
 import React, { Component } from 'react';
 import { Row } from './Row';
 import { AlertMsg } from '../AlertMsg';
 import './index.css';
 
-export default class Form extends Component {
+type Props = {
+  onAddFlight: (e: SyntheticInputEvent<HTMLFormElement>) => void
+};
+
+type State = {
+  msg: string,
+  showMsg: boolean,
+  isModalOpen: boolean
+};
+
+type Fields = {
+  from: { value: string },
+  to: { value: string },
+  when: { value: string },
+  time: { value: string },
+  arrivalsTime: { value: string },
+  airline: { value: string },
+  website: { value: string },
+  noBooking: { value: string },
+  price: { value: string },
+  baggage: { checked: boolean }
+};
+
+export default class Form extends Component<Props, State> {
   state = {
     msg: '',
     showMsg: false,
@@ -14,7 +39,9 @@ export default class Form extends Component {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   };
 
-  onSubmit = e => {
+  onSubmit = (
+    e: { currentTarget: Fields } & SyntheticEvent<HTMLFormElement>
+  ) => {
     this.props.onAddFlight(e);
     this.setState(() => ({ isModalOpen: !this.state.isModalOpen }));
   };

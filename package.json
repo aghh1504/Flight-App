@@ -8,6 +8,7 @@
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "flow-typed": "^2.5.1",
     "font-awesome": "^4.7.0",
     "i": "^0.3.6",
     "moment": "^2.22.2",
@@ -18,10 +19,13 @@
     "typescript": "^3.0.3"
   },
   "devDependencies": {
+    "flow-bin": "^0.82.0",
     "react-scripts": "1.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "flow": "flow",
+    "flow:typed": "npx flow-typed install --overwrite --ignoreDeps peer",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
